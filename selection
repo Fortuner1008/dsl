@@ -1,0 +1,32 @@
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n - 1):
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
+
+def display_top_five(arr):
+    print("\nTop five scores:")
+    for i in range(min(5, len(arr))):
+        print(f"{i + 1}. {arr[-(i + 1)]}")
+
+
+if __name__ == "__main__":
+    n = int(input("Enter the number of students: "))
+    percentages = []
+    
+    print("Enter the first-year percentages of students:")
+    for _ in range(n):
+        percentages.append(float(input()))
+    
+    print("\nOriginal list of percentages:")
+    print(percentages)
+    
+    print("\nSorting using Selection Sort:")
+    selection_sort(percentages)
+    print("Sorted percentages in ascending order:")
+    print(percentages)
+    display_top_five(percentages)
