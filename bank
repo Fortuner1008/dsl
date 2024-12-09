@@ -1,0 +1,36 @@
+def deposit(balance, amount):
+    """Function to deposit an amount into the bank account."""
+    return balance + amount
+
+
+def withdraw(balance, amount):
+    """Function to withdraw an amount from the bank account, ensuring no overdraft."""
+    if balance >= amount:
+        return balance - amount
+    else:
+        print(f"Insufficient balance! Cannot withdraw {amount}. Current balance: {balance}")
+        return balance
+
+
+def process_transactions(transactions):
+    """Function to process a list of transactions and compute the net balance."""
+    balance = 0
+    for transaction in transactions:
+        action, amount = transaction.split()
+        amount = int(amount)
+        if action == 'D':
+            balance = deposit(balance, amount)
+        elif action == 'W':
+            balance = withdraw(balance, amount)
+        else:
+            print(f"Invalid transaction type: {action}. Ignoring.")
+    return balance
+
+
+if __name__ == "__main__":
+    print("Enter transaction log (format: D 100 W 200), separated by commas:")
+    log = input("Transaction log: ").strip()
+    transactions = log.split(", ")
+
+    net_balance = process_transactions(transactions)
+    print(f"Net balance: {net_balance}")
