@@ -1,10 +1,10 @@
 def deposit(balance, amount):
-    """Function to deposit an amount into the bank account."""
+   
     return balance + amount
 
 
 def withdraw(balance, amount):
-    """Function to withdraw an amount from the bank account, ensuring no overdraft."""
+   
     if balance >= amount:
         return balance - amount
     else:
@@ -13,7 +13,7 @@ def withdraw(balance, amount):
 
 
 def process_transactions(transactions):
-    """Function to process a list of transactions and compute the net balance."""
+  
     balance = 0
     for transaction in transactions:
         action, amount = transaction.split()
