@@ -1,5 +1,5 @@
 def linear_search(arr, key):
-    """Linear search to check if a student attended the training."""
+   
     for roll in arr:
         if roll == key:
             return True
@@ -7,7 +7,7 @@ def linear_search(arr, key):
 
 
 def sentinel_search(arr, key):
-    """Sentinel search to check if a student attended the training."""
+   
     n = len(arr)
     last = arr[-1]
     arr[-1] = key
