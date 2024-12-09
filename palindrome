@@ -1,27 +1,23 @@
 def word_with_longest_length(s):
-    """Find the word with the longest length in the string."""
+   
     words = s.split()
     return max(words, key=len)
 
 
 def frequency_of_character(s, char):
-    """Find the frequency of a particular character in the string."""
     return s.count(char)
 
 
 def is_palindrome(s):
-    """Check if the string is a palindrome."""
     s_cleaned = ''.join(filter(str.isalnum, s)).lower()
     return s_cleaned == s_cleaned[::-1]
 
 
 def index_of_first_substring(s, substring):
-    """Find the index of the first appearance of a substring."""
     return s.find(substring)
 
 
 def word_occurrences(s):
-    """Count the occurrences of each word in the string."""
     from collections import Counter
     words = s.split()
     return Counter(words)
