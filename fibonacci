@@ -1,5 +1,5 @@
 def binary_search(arr, key):
-    """Binary search to check if a student attended the training."""
+   
     low, high = 0, len(arr) - 1
     while low <= high:
         mid = (low + high) // 2
@@ -13,7 +13,7 @@ def binary_search(arr, key):
 
 
 def fibonacci_search(arr, key):
-    """Fibonacci search to check if a student attended the training."""
+   
     n = len(arr)
     fib2 = 0
     fib1 = 1
