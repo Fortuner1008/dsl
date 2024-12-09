@@ -1,5 +1,5 @@
 def get_marks():
-    """Get marks input from the user for N students."""
+   
     print("Enter marks for students (use -1 for absent students):")
     marks = []
     N = int(input("Enter number of students: "))
@@ -18,24 +18,24 @@ def get_marks():
 
 
 def average_score(marks):
-    """Calculate the average score of the class."""
+
     present_marks = [mark for mark in marks if mark != -1]
     return sum(present_marks) / len(present_marks) if present_marks else 0
 
 
 def highest_lowest_score(marks):
-    """Find the highest and lowest scores of the class."""
+   
     present_marks = [mark for mark in marks if mark != -1]
     return max(present_marks), min(present_marks)
 
 
 def count_absent_students(marks):
-    """Count the number of students who were absent for the test."""
+   
     return marks.count(-1)
 
 
 def highest_frequency_mark(marks):
-    """Display the mark with the highest frequency."""
+   
     from collections import Counter
 
     present_marks = [mark for mark in marks if mark != -1]
