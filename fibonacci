@@ -1,0 +1,61 @@
+def binary_search(arr, key):
+    """Binary search to check if a student attended the training."""
+    low, high = 0, len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == key:
+            return True
+        elif arr[mid] < key:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return False
+
+
+def fibonacci_search(arr, key):
+    """Fibonacci search to check if a student attended the training."""
+    n = len(arr)
+    fib2 = 0
+    fib1 = 1
+    fibM = fib2 + fib1
+
+    while fibM < n:
+        fib2, fib1 = fib1, fibM
+        fibM = fib2 + fib1
+
+    offset = -1
+
+    while fibM > 1:
+        i = min(offset + fib2, n - 1)
+        if arr[i] < key:
+            fibM, fib1, fib2 = fib1, fib2, fibM - fib1
+            offset = i
+        elif arr[i] > key:
+            fibM, fib1, fib2 = fib2, fib1 - fib2, fibM - fib1
+        else:
+            return True
+
+    if fib1 and offset + 1 < n and arr[offset + 1] == key:
+        return True
+    return False
+
+
+# Main program for Part (b)
+if __name__ == "__main__":
+    print("\nPart (b): Binary Search and Fibonacci Search")
+    n = int(input("Enter the number of students: "))
+    roll_numbers = []
+    print("Enter the roll numbers of students in sorted order:")
+    for _ in range(n):
+        roll_numbers.append(int(input()))
+
+    key = int(input("Enter the roll number to search: "))
+    if binary_search(roll_numbers, key):
+        print(f"Roll number {key} attended the training program (Binary Search).")
+    else:
+        print(f"Roll number {key} did not attend the training program (Binary Search).")
+
+    if fibonacci_search(roll_numbers, key):
+        print(f"Roll number {key} attended the training program (Fibonacci Search).")
+    else:
+        print(f"Roll number {key} did not attend the training program (Fibonacci Search).")
