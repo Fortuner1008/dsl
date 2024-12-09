@@ -1,0 +1,85 @@
+def fibonacci_search(phonebook, key):
+    n = len(phonebook)
+    fib2 = 0  # (m-2)th Fibonacci number
+    fib1 = 1  # (m-1)th Fibonacci number
+    fibM = fib2 + fib1  # mth Fibonacci number
+
+    while fibM < n:
+        fib2, fib1 = fib1, fibM
+        fibM = fib2 + fib1
+
+    offset = -1
+
+    while fibM > 1:
+        i = min(offset + fib2, n - 1)
+
+        if phonebook[i][0] < key:
+            fibM, fib1, fib2 = fib1, fib2, fibM - fib1
+            offset = i
+        elif phonebook[i][0] > key:
+            fibM, fib1, fib2 = fib2, fib1 - fib2, fibM - fib1
+        else:
+            return i
+
+    if fib1 and offset + 1 < n and phonebook[offset + 1][0] == key:
+        return offset + 1
+
+    return -1
+
+
+def insert_friend(phonebook, name, number):
+   
+    index = fibonacci_search(phonebook, name)
+    if index != -1:
+        print(f"Friend '{name}' is already in the phonebook with number {phonebook[index][1]}.")
+    else:
+        phonebook.append((name, number))
+        phonebook.sort(key=lambda x: x[0])
+        print(f"Friend '{name}' added to the phonebook.")
+
+
+# Main program
+if __name__ == "__main__":
+    phonebook = []
+    print("Enter friends' names and mobile numbers (type 'done' to finish):")
+    while True:
+        entry = input("Enter name and number (e.g., John 1234567890): ")
+        if entry.lower() == "done":
+            break
+        try:
+            name, number = entry.split()
+            phonebook.append((name, number))
+        except ValueError:
+            print("Invalid format. Please enter both name and number.")
+    phonebook.sort(key=lambda x: x[0])
+
+    print("\nPhonebook:")
+    for name, number in phonebook:
+        print(f"{name}: {number}")
+
+    while True:
+        print("\nOptions:")
+        print("1. Search for a friend (Fibonacci search)")
+        print("2. Add a new friend")
+        print("3. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            key = input("Enter the name to search: ")
+            index = fibonacci_search(phonebook, key)
+            if index != -1:
+                print(f"Friend '{key}' found with number {phonebook[index][1]}.")
+            else:
+                print(f"Friend '{key}' not found in the phonebook.")
+
+        elif choice == "2":
+            name = input("Enter friend's name: ")
+            number = input("Enter friend's number: ")
+            insert_friend(phonebook, name, number)
+
+        elif choice == "3":
+            print("Exiting program. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
