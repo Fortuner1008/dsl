@@ -8,6 +8,14 @@ def selection_sort(arr):
         arr[i], arr[min_idx] = arr[min_idx], arr[i]
 
 
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+
 def display_top_five(arr):
     print("\nTop five scores:")
     for i in range(min(5, len(arr))):
@@ -27,6 +35,17 @@ if __name__ == "__main__":
     
     print("\nSorting using Selection Sort:")
     selection_sort(percentages)
+    print("Sorted percentages in ascending order:")
+    print(percentages)
+    display_top_five(percentages)
+    
+    print("\nRe-enter the percentages for Bubble Sort:")
+    percentages = []
+    for _ in range(n):
+        percentages.append(float(input()))
+    
+    print("\nSorting using Bubble Sort:")
+    bubble_sort(percentages)
     print("Sorted percentages in ascending order:")
     print(percentages)
     display_top_five(percentages)
