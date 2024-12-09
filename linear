@@ -1,0 +1,39 @@
+def linear_search(arr, key):
+    """Linear search to check if a student attended the training."""
+    for roll in arr:
+        if roll == key:
+            return True
+    return False
+
+
+def sentinel_search(arr, key):
+    """Sentinel search to check if a student attended the training."""
+    n = len(arr)
+    last = arr[-1]
+    arr[-1] = key
+    i = 0
+    while arr[i] != key:
+        i += 1
+    arr[-1] = last
+    return i < n - 1 or arr[-1] == key
+
+
+# Main program for Part (a)
+if __name__ == "__main__":
+    print("Part (a): Linear Search and Sentinel Search")
+    n = int(input("Enter the number of students: "))
+    roll_numbers = []
+    print("Enter the roll numbers of students:")
+    for _ in range(n):
+        roll_numbers.append(int(input()))
+
+    key = int(input("Enter the roll number to search: "))
+    if linear_search(roll_numbers, key):
+        print(f"Roll number {key} attended the training program (Linear Search).")
+    else:
+        print(f"Roll number {key} did not attend the training program (Linear Search).")
+
+    if sentinel_search(roll_numbers, key):
+        print(f"Roll number {key} attended the training program (Sentinel Search).")
+    else:
+        print(f"Roll number {key} did not attend the training program (Sentinel Search).")
