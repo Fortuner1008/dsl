@@ -1,0 +1,68 @@
+def get_marks():
+    """Get marks input from the user for N students."""
+    print("Enter marks for students (use -1 for absent students):")
+    marks = []
+    N = int(input("Enter number of students: "))
+    for _ in range(N):
+        while True:
+            try:
+                mark = int(input(f"Enter mark for student {_ + 1}: "))
+                if mark >= -1:
+                    marks.append(mark)
+                    break
+                else:
+                    print("Please enter a valid mark (0-100) or -1 for absent.")
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
+    return marks
+
+
+def average_score(marks):
+    """Calculate the average score of the class."""
+    present_marks = [mark for mark in marks if mark != -1]
+    return sum(present_marks) / len(present_marks) if present_marks else 0
+
+
+def highest_lowest_score(marks):
+    """Find the highest and lowest scores of the class."""
+    present_marks = [mark for mark in marks if mark != -1]
+    return max(present_marks), min(present_marks)
+
+
+def count_absent_students(marks):
+    """Count the number of students who were absent for the test."""
+    return marks.count(-1)
+
+
+def highest_frequency_mark(marks):
+    """Display the mark with the highest frequency."""
+    from collections import Counter
+
+    present_marks = [mark for mark in marks if mark != -1]
+    if not present_marks:
+        return None
+
+    frequency = Counter(present_marks)
+    most_frequent = max(frequency, key=frequency.get)
+    return most_frequent, frequency[most_frequent]
+
+
+
+if __name__ == "__main__":
+    marks = get_marks()
+    
+    avg = average_score(marks)
+    print(f"\nAverage score of the class: {avg:.2f}")
+    
+    highest, lowest = highest_lowest_score(marks)
+    print(f"Highest score in the class: {highest}")
+    print(f"Lowest score in the class: {lowest}")
+    
+    absent_count = count_absent_students(marks)
+    print(f"Number of students absent: {absent_count}")
+    
+    most_frequent_mark = highest_frequency_mark(marks)
+    if most_frequent_mark:
+        print(f"Mark with the highest frequency: {most_frequent_mark[0]} (Frequency: {most_frequent_mark[1]})")
+    else:
+        print("No marks available to compute highest frequency.")
